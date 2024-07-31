@@ -7,4 +7,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "entrance_page#index"
+  get  "/main_page", to: "backstage#index"
+
+
+  resources :users
 end

@@ -1,6 +1,8 @@
 class EntrancePageController < ApplicationController
 
-    def index
-    end
+  layout 'entrance'
+
+  def index
+  end
 
 end

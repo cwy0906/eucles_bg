@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "entrance_page#index"
+  root "entrance#index"
   get  "/main_page", to: "backstage#index"
 
 

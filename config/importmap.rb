@@ -8,4 +8,5 @@ pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 
 
 pin "jquery", to: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js", preload: true
-pin "bootstrap", to: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", preload: true
+pin "popper", to: 'popper.js', preload: true
+pin "bootstrap", to: 'bootstrap.min.js', preload: true

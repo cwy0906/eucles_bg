@@ -1,0 +1,16 @@
+
+<div class="alert alert-info h-100" role="alert">
+
+  <% if common_message.present? %>
+    <% if common_message.tag == "info" %>
+      <i class="bi bi-info-circle-fill"></i>
+    <% elsif  common_message.tag == "warning" %>
+      <i class="bi bi-exclamation-triangle-fill"></i>
+    <% else %>
+      <i class="bi bi-bug-fill"></i>
+    <% end %>
+    <strong><%= common_message.title %></strong>
+    <span><%= common_message.content %></span>
+  <% end %>
+
+</div>

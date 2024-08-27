@@ -51,6 +51,9 @@ gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 # A support gem for MySQL connecting 
 gem 'mysql2', '~> 0.5.2'
 
+# A support gem for debug line by line
+gem 'byebug', '~> 11.1', '>= 11.1.3'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]

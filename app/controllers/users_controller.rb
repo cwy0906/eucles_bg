@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :user_params, only: [:create]
 
   def index
     @show_users = User.all
@@ -9,25 +8,31 @@ class UsersController < ApplicationController
   end
 
   def create
-    @reserve_user    = User.new(user_params)
+    @reserve_user    = User.new(create_user_params)
     @reserve_user.id = SecureRandom.hex(16)
-    @common_message  = CommonMessage.new(title: "Create new user result :")
     
-    if @reserve_user.save
-      @common_message.tag     = "info"
-      @common_message.content = "success"
-    else
-      @common_message.tag     = "warning"
-      @common_message.content = "failed"
-    end
+    @reserve_user.save
 
-    render :new
+    redirect_to users_path
+  end
+
+  def destroy
+    user_id_hash = delete_user_params[:id]
+    chose_user   = User.find_by(id_hash: user_id_hash)
+
+    User.find(user_id_hash).destroy
+
+    redirect_to users_path
   end
 
   private
-  def user_params
+  def create_user_params
     params[:role] = params[:role].to_i
     params.permit(:email, :user_name, :nickname, :password, :role)
+  end
+
+  def delete_user_params
+    params.permit(:id, :_method)
   end
 
 end

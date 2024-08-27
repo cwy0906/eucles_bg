@@ -1,16 +1,29 @@
 
 <div class="alert alert-info h-100" role="alert">
-
   <% if common_message.present? %>
-    <% if common_message.tag == "info" %>
-      <i class="bi bi-info-circle-fill"></i>
-    <% elsif  common_message.tag == "warning" %>
-      <i class="bi bi-exclamation-triangle-fill"></i>
-    <% else %>
-      <i class="bi bi-bug-fill"></i>
+    <% if common_message[:title] == "Notice" %>
+
+      <div class="alert" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-info-circle-fill"></i>&nbsp;<%= common_message[:title] %></h5>
+        <p class="mb-0"><%= common_message[:content] %></p>
+      </div>
+
+    <% elsif common_message[:title] == "Alert" %>
+
+      <div class="alert" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-exclamation-triangle-fill"></i>&nbsp;<%= common_message[:title] %></h5>
+        <p class="mb-0"><%= common_message[:content] %></p>
+      </div>
+
+    <% elsif common_message[:title] == "Error" %>
+
+      <div class="alert" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-bug-fill"></i>&nbsp;<%= common_message[:title] %></h5>
+        <p class="mb-0"><%= common_message[:content] %></p>
+      </div>
+    
     <% end %>
-    <strong><%= common_message.title %></strong>
-    <span><%= common_message.content %></span>
+
   <% end %>
 
 </div>

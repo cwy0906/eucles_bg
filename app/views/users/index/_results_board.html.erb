@@ -22,10 +22,9 @@
           <td><%= show_user.created_at.in_time_zone("Taipei").strftime("%Y/%m/%d %T %Z") %></td>
           <td><%= show_user.updated_at.in_time_zone("Taipei").strftime("%Y/%m/%d %T %Z") %></td>
           <td>
-            <button type="button" class="btn btn-primary">Edit</button>
+            <%= link_to "Edit", edit_user_path(show_user.id_hash), data: { turbo_method: :get }, class: "btn btn-primary" %>
 
             <%= link_to "Delete", user_path(show_user.id_hash), data: { turbo_method: :delete }, class: "btn btn-secondary" %>
-
           </td>
         </tr>
       <% end %>

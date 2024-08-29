@@ -24,10 +24,34 @@
           <td>
             <%= link_to "Edit", edit_user_path(show_user.id_hash), data: { turbo_method: :get }, class: "btn btn-primary" %>
 
-            <%= link_to "Delete", user_path(show_user.id_hash), data: { turbo_method: :delete }, class: "btn btn-secondary" %>
+            <%= button_tag "Delete", type:"button", class:"btn btn-secondary", id: "delete_btn_#{show_user.id_hash}", data:{bs_toggle:"modal", bs_target: "#delete_hint_Modal", turbo_method: :delete, bg_username: show_user.user_name, bg_url: user_path(show_user.id_hash)}  %>
           </td>
         </tr>
       <% end %>
 
     </tbody>
+
+
   </table>
+
+
+  <!-- delete user hint modal -->
+  <div class="modal fade" id="delete_hint_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content  bg-light">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Hint message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="hint_modal_body_p"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
+
+          <a data-turbo-method="delete" class="btn btn-primary" href="" id="hint_modal_confirm_a">confirm</a>
+
+        </div>
+      </div>
+    </div>
+  </div>

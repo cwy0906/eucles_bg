@@ -1,2 +1,0 @@
-module EntrancePageHelper
-end

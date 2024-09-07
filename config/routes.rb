@@ -6,9 +6,12 @@ Rails.application.routes.draw do
   # get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "entrance#index"
-  get  "/main_page", to: "backstage#index"
 
+  
+  root "backstage#index"
+  get  "/login"    => "user_sessions#index"
+  post '/login'    => "user_sessions#create"
+	delete '/logout' => "user_sessions#destroy" 
 
   resources :users
 end

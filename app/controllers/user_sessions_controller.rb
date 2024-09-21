@@ -1,6 +1,7 @@
 class UserSessionsController < ApplicationController
 
   layout 'entrance'
+  before_action :add_operation_tag
 
   def index
   end

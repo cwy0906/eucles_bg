@@ -21,4 +21,8 @@ class ApplicationController < ActionController::Base
     session[:common_message] = nil
   end
 
+  def add_operation_tag
+    session[:operation_tag] = nil
+  end
+
 end

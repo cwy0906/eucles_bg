@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   
-  before_action :identity_authorize
+  before_action :identity_authorize, :add_operation_tag
   after_action  :clear_common_message, except: [:create, :destroy, :edit, :update]
+
 
   def index
     @show_users = User.all 
@@ -73,6 +74,10 @@ class UsersController < ApplicationController
 
   def delete_user_params
     params.permit(:id, :_method)
+  end
+
+  def add_operation_tag
+    session[:operation_tag] = "users"
   end
 
 end

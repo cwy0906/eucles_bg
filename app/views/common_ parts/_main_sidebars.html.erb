@@ -1,42 +1,92 @@
 
 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2  min-vh-100">
-    <a href="/" class="d-flex align-items-center mb-md-0 me-md-auto text-decoration-none">
-    <%= image_tag("eucles_logo.png", width: "50", height: "50", class: "bi pe-none me-2") %>
-    <span class="fs-5 d-none d-sm-inline">
-    </span>
+    <a href= <%= root_path %> class="d-flex align-items-center mb-md-0 me-md-auto text-decoration-none">
+    <div class="main_menu_icon_zone">
+      <img src="<%= asset_path('eucles_logo.png')%>" width="50" height="50">
+    </div>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
         <li>
-        <a href="#" class="nav-link px-0 align-middle">
-        <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Users</span> </a>
-        </li>
-
-        <li>
-        <a href="#" class="nav-link px-0 align-middle">
-        <i class="fs-4 bi-coin"></i><span class="ms-1 d-none d-sm-inline">&nbsp;FX rates</span> </a>
-        </li>
-
-        <li>
-        <a href="#" class="nav-link px-0 align-middle">
-        <i class="fs-4 bi-graph-up-arrow"></i><span class="ms-1 d-none d-sm-inline">&nbsp;Stock</span> </a>
-        </li>
-
-      <li class="nav-item">
-        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-        <i class="fs-4 bi-calendar-check-fill"></i> <span class="ms-1 d-none d-sm-inline">Schedule</span>
+        <a href= <%= users_path %> class="nav-link px-0 align-middle">
+          <div class="main_menu_item_zone">
+            <% if operation_tag == "users" %>
+              <div class="text-secondary">
+                <i class="fs-4 bi-people-fill"></i>&nbsp;Users
+              </div>
+            <% elsif %>
+              <div>
+                <i class="fs-4 bi-people"></i>&nbsp;Users
+              </div>
+            <% end %>
+          </div>
         </a>
-            
-        <ul class="nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-            <li class="w-100">
-                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-            </li>
-        </ul>
-      </li>  
+        </li>
+
+        <li>
+        <a href="#" class="nav-link px-0 align-middle">
+          <div class="main_menu_item_zone">
+            <div>
+            <i class="fs-4 bi bi-credit-card-2-back"></i>&nbsp;FX rates
+            </div>
+          </div>
+        </a>
+        </li>
+
+        <li>
+        <a href="#" class="nav-link px-0 align-middle">
+          <div class="main_menu_item_zone">
+            <div>
+            <i class="fs-4 bi-bar-chart-line"></i>&nbsp;Stock
+            </div>
+          </div>
+        </a>
+        </li>
+
+<!--
+        <li>
+        <a href="#" class="nav-link px-0 align-middle">
+          <div class="main_menu_item_zone">
+            <div>
+            <i class="fs-4 bi bi-credit-card-2-back"></i>&nbsp;FX rates
+            </div>
+          </div>
+        </a>
+        </li>
+
+
+        <li>
+        <a href="#" class="nav-link px-0 align-middle">
+          <div class="main_menu_item_zone">
+            <div class="text-secondary">
+            <i class="fs-4 bi bi-credit-card-2-back-fill"></i>&nbsp;FX rates
+            </div>
+          </div>
+        </a>
+        </li>
+
+
+        <li>
+        <a href="#" class="nav-link px-0 align-middle">
+          <div class="main_menu_item_zone">
+            <div>
+            <i class="fs-4 bi-bar-chart-line"></i>&nbsp;Stock
+            </div>
+          </div>
+        </a>
+        </li>
+
+        <li>
+        <a href="#" class="nav-link px-0 align-middle">
+          <div class="main_menu_item_zone">
+            <div class="text-secondary">
+            <i class="fs-4 bi-bar-chart-line-fill"></i>&nbsp;Stock
+            </div>
+          </div>
+        </a>
+        </li>
+-->
 
     </ul>
     <hr>
@@ -46,7 +96,6 @@
             <strong>CWY</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small bg-dark shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>

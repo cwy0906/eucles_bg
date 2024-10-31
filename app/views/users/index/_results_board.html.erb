@@ -1,36 +1,44 @@
 
   <table class="table table-striped">
-    <thead class="table-light">
-      <tr>
-        <th scope="col">User name</th>
-        <th scope="col">Nickname</th>
-        <th scope="col">Email</th>
-        <th scope="col">Role</th>
-        <th scope="col">created at</th>
-        <th scope="col">updated at</th>
-        <th scope="col">operate</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      <% show_users.each do |show_user| %>
-        <tr class="bg-info">
-          <th scope="row"><%= show_user.user_name %></th>
-          <td><%= show_user.nickname %></td>
-          <td><%= show_user.email %></td>
-          <td><%= show_user.role %></td>
-          <td><%= show_user.created_at.in_time_zone("Taipei").strftime("%Y/%m/%d %T %Z") %></td>
-          <td><%= show_user.updated_at.in_time_zone("Taipei").strftime("%Y/%m/%d %T %Z") %></td>
-          <td>
-            <%= link_to "Edit", edit_user_path(show_user.id_hash), data: { turbo_method: :get }, class: "btn btn-primary" %>
-
-            <%= button_tag "Delete", type:"button", class:"btn btn-secondary", id: "delete_btn_#{show_user.id_hash}", data:{bs_toggle:"modal", bs_target: "#delete_hint_Modal", turbo_method: :delete, bg_username: show_user.user_name, bg_url: user_path(show_user.id_hash)}  %>
-          </td>
+    
+      <% if show_users.size != 0 %>
+      <thead class="table-light">
+        <tr>
+          <th scope="col">User name</th>
+          <th scope="col">Nickname</th>
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+          <th scope="col">created at</th>
+          <th scope="col">updated at</th>
+          <th scope="col">operate</th>
         </tr>
+      </thead>
+      <tbody>
+
+        <% show_users.each do |show_user| %>
+          <tr class="bg-info">
+            <th scope="row"><%= show_user.user_name %></th>
+            <td><%= show_user.nickname %></td>
+            <td><%= show_user.email %></td>
+            <td><%= show_user.role %></td>
+            <td><%= show_user.created_at.in_time_zone("Taipei").strftime("%Y/%m/%d %T %Z") %></td>
+            <td><%= show_user.updated_at.in_time_zone("Taipei").strftime("%Y/%m/%d %T %Z") %></td>
+            <td>
+              <%= link_to "Edit", edit_user_path(show_user.id_hash), data: { turbo_method: :get }, class: "btn btn-primary" %>
+
+              <%= button_tag "Delete", type:"button", class:"btn btn-secondary", id: "delete_btn_#{show_user.id_hash}", data:{bs_toggle:"modal", bs_target: "#delete_hint_Modal", turbo_method: :delete, bg_username: show_user.user_name, bg_url: user_path(show_user.id_hash)}  %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      
+      <% elsif %>
+      <tbody>
+          <tr class="bg-light">
+          <th scope="row">No matching users found.</th>
+          </tr>
+      </tbody>
       <% end %>
-
-    </tbody>
-
 
   </table>
 

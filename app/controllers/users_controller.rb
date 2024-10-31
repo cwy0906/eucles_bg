@@ -5,7 +5,14 @@ class UsersController < ApplicationController
 
 
   def index
-    @show_users = User.all 
+    search_keyword  = index_user_params[:keyword]
+    if search_keyword.present?
+      @show_users = User.where("user_name LIKE ?", "%#{search_keyword}%").distinct
+    else
+      @show_users = User.order(:role).all 
+    end
+
+    @pre_keyword  = search_keyword
     session[:common_message] ||= { title: "Notice", content: "Welcome to user index page." }
   end
 
@@ -58,6 +65,10 @@ class UsersController < ApplicationController
   end
 
   private
+  def index_user_params
+    params.permit(:keyword, :commit)
+  end
+
   def create_user_params
     params[:role] = params[:role].to_i
     params.permit(:email, :user_name, :nickname, :password, :role)

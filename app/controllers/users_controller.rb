@@ -6,10 +6,12 @@ class UsersController < ApplicationController
 
   def index
     search_keyword  = index_user_params[:keyword]
+    chose_page      = index_user_params[:page].present? ? index_user_params[:page].to_i : 1 
+
     if search_keyword.present?
-      @show_users = User.where("user_name LIKE ?", "%#{search_keyword}%").distinct
+      @show_users = User.where("user_name LIKE ?", "%#{search_keyword}%").distinct.page(chose_page)
     else
-      @show_users = User.order(:role).all 
+      @show_users = User.order(:role).all.page(chose_page)
     end
 
     @pre_keyword  = search_keyword
@@ -66,7 +68,7 @@ class UsersController < ApplicationController
 
   private
   def index_user_params
-    params.permit(:keyword, :commit)
+    params.permit(:keyword, :page, :commit)
   end
 
   def create_user_params

@@ -54,6 +54,9 @@ gem 'mysql2', '~> 0.5.2'
 # A support gem for debug line by line
 gem 'byebug', '~> 11.1', '>= 11.1.3'
 
+# paginate gem
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]

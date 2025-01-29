@@ -89,8 +89,4 @@ class UsersController < ApplicationController
     params.permit(:id, :_method)
   end
 
-  def add_operation_tag
-    session[:operation_tag] = "users"
-  end
-
 end

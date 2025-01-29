@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def add_operation_tag
-    session[:operation_tag] = nil
+    controller_name == 'backstage' ? session[:operation_tag] = nil : session[:operation_tag] = controller_name
   end
 
 end

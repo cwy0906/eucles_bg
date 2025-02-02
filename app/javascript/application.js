@@ -5,3 +5,7 @@ import "@hotwired/turbo-rails"
 import "jquery"
 import "popper"
 import "bootstrap"
+
+import "chartkick"
+import "Chart.bundle"
+import "chartjs-plugin-annotation"

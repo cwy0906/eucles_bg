@@ -36,3 +36,6 @@
 
 #database config
 /config/database.yml
+
+#app associated config
+/config/initializers/app_config.yml

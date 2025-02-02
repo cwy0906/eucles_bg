@@ -1,0 +1,6 @@
+
+web_crawler:
+  bot_source:
+    instantly_rate_path:      
+    jpy_recent_day_rate_path: 
+    usd_recent_day_rate_path:

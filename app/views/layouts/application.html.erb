@@ -19,7 +19,9 @@
       <div class="row h-100">
 
         <div class="col-md-2 col-xs-1 bg-light">
+          <div class="sidebar sticky-top">
           <%= render partial: "common_ parts/main_sidebars", locals: { operation_tag: (session[:operation_tag].to_s rescue nil) } %>
+          </div>
         </div>
 
         <div class="col-md-10 col-xs-11 py-2">

@@ -50,7 +50,7 @@ class BackstageController < ApplicationController
     sum              = 0.0
 
     rate_infos.each do |rate_info|
-      key_info   = rate_info.at_css('td:nth-child(1)').text.strip
+      key_info   = rate_info.at_css('td:nth-child(1)').text.strip[11..20]
       value_info = rate_info.at_css('td:nth-child(4)').text.strip
       rate_infos_array << [key_info, value_info]
       sum        = sum + value_info.to_f
@@ -75,7 +75,7 @@ class BackstageController < ApplicationController
     sum              = 0.0
 
     rate_infos.each do |rate_info|
-      key_info   = rate_info.at_css('td:nth-child(1)').text.strip
+      key_info   = rate_info.at_css('td:nth-child(1)').text.strip[11..20]
       value_info = rate_info.at_css('td:nth-child(5)').text.strip
       rate_infos_array << [key_info, value_info]
       sum        = sum + value_info.to_f
@@ -83,7 +83,7 @@ class BackstageController < ApplicationController
 
     {
       day_info:         day_info,
-      mean_rate:        (sum/rate_infos_array.size.to_f).round(2),
+      mean_rate:        (sum/rate_infos_array.size.to_f).round(3),
       historical_rate:  rate_infos_array,
     }
   end

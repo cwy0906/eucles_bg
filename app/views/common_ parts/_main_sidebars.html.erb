@@ -6,6 +6,20 @@
     </div>
     </a>
     <hr>
+
+    <div class="dropdown">
+        <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocLh0gBI5SdU9vDk508ThfuTZLrxr8kgMfsxJkoEiu4sceQM3AJF=s288-c-no" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong>CWY</strong>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small bg-dark shadow" aria-labelledby="dropdownUser1">
+            <li>
+              <%= link_to "Sign out", logout_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
+            </li>
+        </ul>
+    </div>
+    <hr>
+
     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
         <li>
@@ -33,7 +47,7 @@
           </div>
         </a>
         </li>
-
+<!--
         <li>
         <a href="#" class="nav-link px-0 align-middle">
           <div class="main_menu_item_zone">
@@ -43,7 +57,7 @@
           </div>
         </a>
         </li>
-
+-->
 <!--
         <li>
         <a href="#" class="nav-link px-0 align-middle">
@@ -89,20 +103,6 @@
 -->
 
     </ul>
-    <hr>
-    <div class="dropdown pb-3">
-        <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://lh3.googleusercontent.com/a/ACg8ocLh0gBI5SdU9vDk508ThfuTZLrxr8kgMfsxJkoEiu4sceQM3AJF=s288-c-no" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>CWY</strong>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small bg-dark shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <%= link_to "Sign out", logout_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
-            </li>
-        </ul>
-    </div>
 
 </div>
 

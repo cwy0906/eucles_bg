@@ -3,14 +3,16 @@
   <head>
     <title>EuclesBg</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" as="style"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" as="style">
     
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "sidebars", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "tabs", "data-turbo-track": "reload" %>    
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload","as": "style"%>
+    <%= stylesheet_link_tag "sidebars", "data-turbo-track": "reload", "as": "style"%>
+    <%= stylesheet_link_tag "tabs", "data-turbo-track": "reload", "as": "style"%>    
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "application/layouts" %>
   </head>
 
   <body class="bg-info">
@@ -19,7 +21,7 @@
       <div class="row h-100">
 
         <div class="col-md-2 col-xs-1 bg-light">
-          <div class="sidebar sticky-top">
+          <div class="sticky-top">
           <%= render partial: "common_ parts/main_sidebars", locals: { operation_tag: (session[:operation_tag].to_s rescue nil) } %>
           </div>
         </div>

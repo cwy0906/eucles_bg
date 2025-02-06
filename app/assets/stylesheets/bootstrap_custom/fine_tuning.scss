@@ -26,6 +26,17 @@
   border-color: #9797fb; /*set the color you want here*/
 }
 
+.btn-item {
+  width: 80%;
+}
+
+.btn-item:hover, .btn-item:focus, .btn-item:active, .btn-item.active, .open>.dropdown-toggle.btn-item {
+  color: #0559ad;
+  border-color: #60bdff; /*set the color you want here*/
+
+  background-color: #acd6f6;
+}
+
 .main_menu_item_zone {
   border:1px;
   border-radius: 80px;

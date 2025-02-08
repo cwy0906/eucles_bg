@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   before_action :identity_authorize
-  before_action :add_operation_main_tag, :add_operation_sub_tag
+  before_action :add_operation_main_tag
+  before_action :clear_operation_sub_tag
+
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -24,10 +26,10 @@ class ApplicationController < ActionController::Base
   end
 
   def add_operation_main_tag
-    controller_name == 'backstage' ? session[:operation_main_tag] = nil : session[:operation_main_tag] = controller_name
+    session[:operation_main_tag] = controller_name
   end
 
-  def add_operation_sub_tag
+  def clear_operation_sub_tag
     session[:operation_sub_tag] = nil
   end
 

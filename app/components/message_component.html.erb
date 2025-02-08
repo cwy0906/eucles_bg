@@ -1,0 +1,8 @@
+<div class="alert alert-info h-100" role="alert">
+  <% if @common_message.present? %>
+    <div class="alert" role="alert">
+      <h5 class="alert-heading"><i class="<%= message_icon_status %>"></i>&nbsp;<%= common_message_title %></h5>
+      <p class="mb-0"><%= common_message_content %></p>
+    </div> 
+  <% end %> 
+</div>

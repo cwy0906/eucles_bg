@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  
-  before_action :identity_authorize, :add_operation_tag
+
   after_action  :clear_common_message, except: [:create, :destroy, :edit, :update]
 
 

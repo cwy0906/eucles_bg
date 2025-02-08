@@ -1,7 +1,5 @@
 class BackstageController < ApplicationController
 
-  before_action :identity_authorize, :add_operation_tag
-
   def index
     @instantly_rate_result      = bot_instantly_exchange_rate_crawl
     @recent_day_jpy_rate_result = bot_recent_day_jpy_exchange_rate_crawl

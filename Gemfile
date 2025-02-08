@@ -57,12 +57,15 @@ gem 'byebug', '~> 11.1', '>= 11.1.3'
 # paginate gem
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
 
-# A support gem for web crawler (Static web page)
+# support gems for web crawler (Static web page)
 gem 'faraday', '~> 2.12', '>= 2.12.2'
 gem 'nokogiri', '~> 1.18', '>= 1.18.2'
 gem 'chartkick', '~> 5.1', '>= 5.1.2'
 gem 'groupdate', '~> 6.5', '>= 6.5.1'
 gem 'settingslogic', '~> 2.0', '>= 2.0.9'
+
+# A support gem for organizes frontend common UI 
+gem 'view_component', '~> 3.21'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

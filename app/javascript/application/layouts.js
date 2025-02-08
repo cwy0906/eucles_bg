@@ -1,2 +1,2 @@
 
-console.log("layout.js is running!");
+console.log("application/layouts.js is running!");

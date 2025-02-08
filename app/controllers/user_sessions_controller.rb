@@ -1,7 +1,7 @@
 class UserSessionsController < ApplicationController
 
   layout 'entrance'
-  before_action :add_operation_tag
+  skip_before_action :identity_authorize, only: [:index, :create]
 
   def index
   end

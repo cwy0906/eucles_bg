@@ -14,4 +14,6 @@ Rails.application.routes.draw do
 	delete '/logout' => "user_sessions#destroy" 
 
   resources :users
+
+  get  "/exchange_rate/:bank_name/index" => "exchange_rate#index"
 end

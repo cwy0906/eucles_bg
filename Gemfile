@@ -67,6 +67,9 @@ gem 'settingslogic', '~> 2.0', '>= 2.0.9'
 # A support gem for organizes frontend common UI 
 gem 'view_component', '~> 3.21'
 
+# support gems for setting periodic schedule ＆ associated feature
+gem 'telegram-bot', '~> 0.16.7'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]

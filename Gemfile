@@ -69,6 +69,9 @@ gem 'view_component', '~> 3.21'
 
 # support gems for setting periodic schedule ＆ associated feature
 gem 'telegram-bot', '~> 0.16.7'
+gem 'sidekiq', '~> 7.3', '>= 7.3.8'
+gem 'sidekiq-scheduler', '~> 5.0', '>= 5.0.6'
+gem 'foreman', '~> 0.88.1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -1,3 +1,6 @@
+
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -16,4 +19,6 @@ Rails.application.routes.draw do
   resources :users
 
   get  "/exchange_rate/:bank_name/index" => "exchange_rate#index"
+
+  mount Sidekiq::Web => "/sidekiq"
 end

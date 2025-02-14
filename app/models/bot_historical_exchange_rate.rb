@@ -1,0 +1,3 @@
+class BotHistoricalExchangeRate < ApplicationRecord
+
+end

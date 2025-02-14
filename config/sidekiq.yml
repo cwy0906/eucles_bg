@@ -1,0 +1,11 @@
+
+:concurrency: 5
+:queues:
+  - default
+  - mailers
+:scheduler:
+  :schedule:
+    test_worker_job:
+      cron: "*/1 * * * *"  # 每 5 分鐘執行一次
+      class: "TestWorkerJob"
+      args: ["Scheduled Task"]

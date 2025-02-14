@@ -33,10 +33,9 @@
     <%= f.submit %s(Sign in), class: "btn btn-primary w-100 py-2" %>
   <% end %>
 
-  <% if session[:common_message] %>  
+ 
     <hr>
-    <%= render partial: "common_ parts/message_zone", locals: { common_message: (session[:common_message].deep_symbolize_keys rescue nil) } %>
-  <% end %>
+    <%= render MessageComponent.new(session[:common_message]) %>
 
   <div class="dropdown mt-5 mb-3">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">

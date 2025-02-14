@@ -4,3 +4,10 @@ web_crawler:
     instantly_rate_path:      
     jpy_recent_day_rate_path: 
     usd_recent_day_rate_path:
+
+telegram_bots:
+  ada:
+    name:    
+    bot_id:  
+    token:   
+    chat_id: 

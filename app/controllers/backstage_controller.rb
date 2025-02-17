@@ -38,7 +38,7 @@ class BackstageController < ApplicationController
   end
 
   def bot_recent_day_jpy_exchange_rate_crawl
-    source_path = AppConfig.web_crawler.bot_source.jpy_recent_day_rate_path
+    source_path = AppConfig.web_crawler.bot_source.jpy_recent_day_rates_path
     response    = Faraday.get(source_path).body
     html_data   = Nokogiri::HTML(response)
 
@@ -63,7 +63,7 @@ class BackstageController < ApplicationController
   end
 
   def bot_recent_day_usd_exchange_rate_crawl
-    source_path = AppConfig.web_crawler.bot_source.usd_recent_day_rate_path
+    source_path = AppConfig.web_crawler.bot_source.usd_recent_day_rates_path
     response    = Faraday.get(source_path).body
     html_data   = Nokogiri::HTML(response)
 

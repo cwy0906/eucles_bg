@@ -23,7 +23,7 @@
         <div class="col-md-2 col-xs-1 bg-light">
           <div class="sticky-top">
           
-          <%= render SidebarComponent.new(@current_user, session[:operation_main_tag], session[:operation_sub_tag]) %>
+          <%= render SidebarComponent.new(@current_user, session[:option]['operation_main_tag'], session[:option]['operation_sub_tag']) %>
 
           </div>
         </div>
@@ -31,7 +31,7 @@
         <div class="col-md-10 col-xs-11 py-2">
           <div class="row">
             <div class="col-md-12 col-xs-12" style="height: 140px;">
-              <%= render MessageComponent.new(session[:common_message]) %>
+              <%= render MessageComponent.new(session[:option]['common_message']) %>
             </div>
             <div class="col-md-12 col-xs-12 py-2">
                 <%= yield %>

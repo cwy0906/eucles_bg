@@ -7,8 +7,22 @@
     </div>
   </nav>
   <div class="tab-content bg-light p-3 overflow-auto" id="nav-tabContent" style="max-height: 80vh;">
+
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     
+      <strong><%=session[:option]['operation_sub_tag']%> Recent Exchange Rate Trend Chart</strong>
+      <hr>
+
+      <div data-controller="jpy-period-chart" data-jpy-period-chart-url-value="/exchange_rate/<%=session[:option]['operation_sub_tag']%>/update_jpy_chart">
+        <strong>JPY</strong><p>Time Interval :  <span data-jpy-period-chart-target="periodInfo"></span></p>
+
+        <div data-jpy-period-chart-target="chartContainer" style="height: 40vh;"></div>
+
+        <a class="btn btn-primary" data-jpy-period-chart-target="updateBtn6m" data-action="click->jpy-period-chart#load6mChart">past six months</a>
+        <a class="btn btn-primary", data-jpy-period-chart-target="updateBtn3m" data-action="click->jpy-period-chart#load3mChart">past three months</a>
+        <a class="btn btn-primary" data-jpy-period-chart-target="updateBtn1w" data-action="click->jpy-period-chart#load1wChart">past one week</a>
+      </div>
+
 
     </div>
 

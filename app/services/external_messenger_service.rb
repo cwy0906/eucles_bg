@@ -8,11 +8,10 @@ class ExternalMessengerService
     @chat_id = chat_id
   end
 
-  def send_demo_messenge(message)
+  def send_normal_messenge(message)
     bot = Telegram::Bot::Client.new(@token)
     bot.send_message(chat_id: @chat_id, text: message)
   end
-
 
 
 end

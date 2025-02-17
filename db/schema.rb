@@ -10,11 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_13_173914) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_14_112509) do
   create_table "bot_historical_exchange_rates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "recorded_date", null: false
     t.integer "currency", null: false
-    t.decimal "exchange_rate", precision: 7, scale: 4, null: false
+    t.decimal "cash_buying_rate", precision: 7, scale: 4, null: false
+    t.decimal "cash_selling_rate", precision: 7, scale: 4, null: false
+    t.decimal "spot_buying_rate", precision: 7, scale: 4, null: false
+    t.decimal "spot_selling_rate", precision: 7, scale: 4, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["currency"], name: "index_bot_historical_exchange_rates_on_currency"
@@ -25,6 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_13_173914) do
     t.string "creator_id", null: false
     t.string "bank_name", null: false
     t.integer "currency", null: false
+    t.integer "rate_type", null: false
     t.decimal "target_rate", precision: 7, scale: 4, null: false
     t.decimal "rate_at_setting", precision: 7, scale: 4
     t.integer "alert_type", default: 0

@@ -12,18 +12,18 @@ class UserSessionsController < ApplicationController
     tbc_user         = User.find_by(email: request_email)&.authenticate(request_password)
 
     if tbc_user.present?
-      session[:user_id] = tbc_user.id_hash
-      session[:common_message] = { title: "Notice", content: "Welcome to index page, #{tbc_user.nickname}" }
+      session[:core] = {'user_id' => tbc_user.id_hash}
+      session[:option]['common_message'] = { title: "Notice", content: "Welcome to index page, #{tbc_user.nickname}" }
       redirect_to root_path
     else
-      session[:common_message] = { title: "Alert", content: "No such user by this email & pw." }
+      session[:option]['common_message'] = { title: "Alert", content: "No such user by this email & pw." }
       render :index
     end
   end
 
   def destroy
-    session.delete(:user_id)
-    session[:common_message] = { title: "Notice", content: "Logged out!" }
+    session.delete(:core)
+    session[:option]['common_message'] = { title: "Notice", content: "Logged out!" }
     redirect_to login_path
   end
 

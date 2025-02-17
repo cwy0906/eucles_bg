@@ -2,18 +2,23 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   helper_method :current_user
+  before_action :clear_optional_session_data
   before_action :identity_authorize
   before_action :add_operation_main_tag
-  before_action :clear_operation_sub_tag
+
 
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    if session[:core].present? && session[:core]['user_id'].present?
+      @current_user = User.find(session[:core]['user_id'])
+    else 
+      @current_user = nil
+    end
   end
 
   def identity_authorize
-    if current_user.nil? 
-      session[:common_message] = { title: "Notice", content: "Input user id & pw for logging." }
+    if current_user.nil?
+      session[:option]['common_message'] = { title: "Notice", content: "Input user id & pw for logging." }
       redirect_to login_path
     end
   end
@@ -21,16 +26,12 @@ class ApplicationController < ActionController::Base
   def role_authorize
   end
 
-  def clear_common_message
-    session[:common_message] = nil
+  def clear_optional_session_data
+    session[:option] = {}
   end
 
   def add_operation_main_tag
-    session[:operation_main_tag] = controller_name
-  end
-
-  def clear_operation_sub_tag
-    session[:operation_sub_tag] = nil
+    session[:option]['operation_main_tag'] = controller_name
   end
 
 end

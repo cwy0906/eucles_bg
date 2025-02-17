@@ -35,12 +35,12 @@ class SidebarComponent < ViewComponent::Base
   def fx_rate_item_status
     info_data   = { bank_link: {bot: "/exchange_rate/bot/index"}}
     if @operation_main_tag == "exchange_rate"
-      info_data[:main_tag] = {open:"show",mark:""}
+      info_data[:main_tag] = {open:"show",mark:"",fill:"-fill"}
     else
-      info_data[:main_tag] = {open:"",mark:"collapsed"}
+      info_data[:main_tag] = {open:"",mark:"collapsed",fill:""}
     end
 
-    if @operation_sub_tag  == "BOT"
+    if @operation_sub_tag  == "bot"
       info_data[:sub_tag] = "active"
     else
       info_data[:sub_tag] = ""

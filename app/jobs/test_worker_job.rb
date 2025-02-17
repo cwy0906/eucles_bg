@@ -5,7 +5,7 @@ class TestWorkerJob < ApplicationJob
     # Do something later
     messenge = "This is periodic test, --(#{ Time.now.strftime('%Y/%m/%d %I:%M %p')})"
     service = ExternalMessengerService.new
-    service.send_demo_messenge(messenge)
+    service.send_normal_messenge(messenge)
 
   end
 end

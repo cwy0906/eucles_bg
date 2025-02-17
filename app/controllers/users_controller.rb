@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  after_action  :clear_common_message, except: [:create, :destroy, :edit, :update]
+  after_action  :clear_optional_session_data, except: [:create, :destroy, :edit, :update]
 
 
   def index
@@ -14,11 +14,11 @@ class UsersController < ApplicationController
     end
 
     @pre_keyword  = search_keyword
-    session[:common_message] ||= { title: "Notice", content: "Welcome to user index page." }
+    session[:option]['common_message'] ||= { title: "Notice", content: "Welcome to user index page." }
   end
 
   def new
-    session[:common_message] = { title: "Notice", content: "Input new user profile." }
+    session[:option]['common_message'] = { title: "Notice", content: "Input new user profile." }
   end
 
   def create
@@ -26,9 +26,9 @@ class UsersController < ApplicationController
     @reserve_user.id = SecureRandom.hex(16)
     
     if @reserve_user.save
-      session[:common_message] = { title: "Notice", content: "New user successfully created." }
+      session[:option]['common_message'] = { title: "Notice", content: "New user successfully created." }
     else
-      session[:common_message]  = { title: "Alert", content: "Failed to create new user." }
+      session[:option]['common_message']  = { title: "Alert", content: "Failed to create new user." }
     end
 
     redirect_to users_path
@@ -37,16 +37,16 @@ class UsersController < ApplicationController
   def edit
     user_id_hash = edit_user_params[:id]
     @edit_user   = User.find_by(id_hash: user_id_hash)
-    session[:common_message] = { title: "Notice", content: "Edit user profile." }
+    session[:option]['common_message'] = { title: "Notice", content: "Edit user profile." }
   end
 
   def update
     user_id_hash = params[:id]
     update_user  = User.find_by(id_hash: user_id_hash)
     if update_user.update(update_user_params)
-      session[:common_message] = { title: "Notice", content: "User successfully updated." }
+      session[:option]['common_message'] = { title: "Notice", content: "User successfully updated." }
     else
-      session[:common_message]  = { title: "Alert", content: "Failed to update user." }
+      session[:option]['common_message']  = { title: "Alert", content: "Failed to update user." }
     end
     
     redirect_to users_path
@@ -57,9 +57,9 @@ class UsersController < ApplicationController
     chose_user   = User.find_by(id_hash: user_id_hash)
 
     if User.find(user_id_hash).destroy
-      session[:common_message] = { title: "Notice", content: "Chose user successfully destroyed." }
+      session[:option]['common_message'] = { title: "Notice", content: "Chose user successfully destroyed." }
     else
-      session[:common_message]  = { title: "Alert", content: "Failed to destroy chose user." }
+      session[:option]['common_message']  = { title: "Alert", content: "Failed to destroy chose user." }
     end
 
     redirect_to users_path

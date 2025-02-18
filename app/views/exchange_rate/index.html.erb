@@ -24,6 +24,16 @@
       </div>
 
 
+      <div data-controller="usd-period-chart" data-usd-period-chart-url-value="/exchange_rate/<%=session[:option]['operation_sub_tag']%>/update_usd_chart">
+        <strong>USD</strong><p>Time Interval :  <span data-usd-period-chart-target="periodInfo"></span></p>
+
+        <div data-usd-period-chart-target="chartContainer" style="height: 40vh;"></div>
+
+        <a class="btn btn-primary" data-usd-period-chart-target="updateBtn6m" data-action="click->usd-period-chart#load6mChart">past six months</a>
+        <a class="btn btn-primary", data-usd-period-chart-target="updateBtn3m" data-action="click->usd-period-chart#load3mChart">past three months</a>
+        <a class="btn btn-primary" data-usd-period-chart-target="updateBtn1w" data-action="click->usd-period-chart#load1wChart">past one week</a>
+      </div>
+
     </div>
 
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"> </div>

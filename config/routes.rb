@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get  "/exchange_rate/:bank_name/index" => "exchange_rate#index"
   get  "/exchange_rate/:bank_name/update_jpy_chart" => "exchange_rate#update_jpy_chart"
   get  "/exchange_rate/:bank_name/update_usd_chart" => "exchange_rate#update_usd_chart"
+  get  "/exchange_rate/:bank_name/schedule_inquiry" => "exchange_rate#schedule_inquiry"
 
   mount Sidekiq::Web => "/sidekiq"
 end

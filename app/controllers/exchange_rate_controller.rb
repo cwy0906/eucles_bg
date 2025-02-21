@@ -1,23 +1,28 @@
 class ExchangeRateController < ApplicationController
-  
+  before_action :add_operation_sub_tag
+
   def index
     bank_name = params[:bank_name]
     session[:option]['common_message'] ||= { title: "Notice", content: "Welcome to exchange rate index page. #{bank_name}" }
-    session[:option]['operation_sub_tag'] = 'bot'
+    
   end
 
   def update_jpy_chart
     bank_name = params[:bank_name]
     period    = params[:period]
-    session[:option]['operation_sub_tag'] = 'bot'
     render json: query_jpy_historical_rates(bank_name, period)
   end
 
   def update_usd_chart
     bank_name = params[:bank_name]
     period    = params[:period]
-    session[:option]['operation_sub_tag'] = 'bot'
     render json: query_usd_historical_rates(bank_name, period)
+  end
+
+  def schedule_inquiry
+    bank_name    = params[:bank_name]
+    user_id_hash = params[:user_id_hash]
+    render json: ExchangeRateMonitor.where(creator_id: user_id_hash).as_json
   end
 
   private
@@ -73,6 +78,10 @@ class ExchangeRateController < ApplicationController
     {"usd_query_date":{"start": usd_query_start_date.to_s ,"end": usd_query_end_date.to_s},
     "recent_period_usd_rate_result":{"mean_rate": usd_query_mean_rate,"historical_rate": usd_query_rates_array}}
     
+  end
+
+  def add_operation_sub_tag
+    session[:option]['operation_sub_tag'] = 'bot'
   end
 
 end

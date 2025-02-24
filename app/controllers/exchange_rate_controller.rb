@@ -25,6 +25,26 @@ class ExchangeRateController < ApplicationController
     render json: ExchangeRateMonitor.where(creator_id: user_id_hash).as_json
   end
 
+  def schedule_update
+    schedule_id              = params[:schedule_id]
+    schedule_target_rate     = params[:schedule_target_rate]
+    schedule_message_content = params[:schedule_message_content]
+    if params[:schedule_status].present?
+      schedule_status = params[:schedule_status] == "on" ? "pending" : "paused"
+    else
+      schedule_status = nil
+    end
+
+    update_hash = {target_rate: schedule_target_rate, message_content: schedule_message_content, status: schedule_status} 
+    update_hash = update_hash.select {|key, value| value.present? }
+    
+    if ExchangeRateMonitor.find(schedule_id).update!(update_hash)
+      render json: { message: "status updated successfully."}, status: :ok
+    else
+      render json: { message: "status update failed."}, status: :error
+    end
+  end 
+
   private
   def query_jpy_historical_rates(bank_name ,period = '6m')
     historical_rate_class = "#{bank_name.capitalize}HistoricalExchangeRate".constantize

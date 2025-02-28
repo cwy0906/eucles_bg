@@ -66,42 +66,53 @@ export default class extends Controller {
     }
     
     return `
+      <div class="col-sm-4">
       <div class="card">
-      <h5 class="card-header">
-        <strong>Bank name:</strong>&nbsp;<em>${schedule_obj["bank_name"]}</em>&nbsp;&nbsp;&nbsp;<strong>Currency:</strong>&nbsp;<em>${schedule_obj["currency"]}</em>&nbsp;&nbsp;&nbsp;<strong>Status:</strong>&nbsp;<em>${schedule_obj["status"]}</em>
-      </h5>
-      <div class="card-body d-flex">
-        <div class="flex-fill d-flex align-items-stretch">
-            <div class="d-flex gap-2 m-1">
-                <span class="badge bg-primary rounded-pill fs-5 fw-bold py-4 px-2">Current: ${schedule_obj["rate_at_setting"]}</span>
-                <span class="badge bg-info rounded-pill fs-5 fw-bold py-4 px-2">Threshold:${schedule_obj["target_rate"]}</span>
-            </div>
-            <br>
-            <div class="d-flex gap-2">
-              <a href="#" class="btn btn-success m-1" data-bs-toggle="modal" data-bs-target="#editorModal_${schedule_obj["id"]}">Adjust alert setting</a>
-              <div class="form-check form-switch m-1">
-                <input class="form-check-input" type="checkbox" role="switch" id="status_switch_${schedule_obj["id"]}" data-action="change->schedule-overview#change_schedule_status" value="${schedule_status_tag[0]}" onchange="this.value = this.checked ? 'on' : 'off'" ${schedule_status_tag[1]}>
-                <label class="form-check-label" for="">switch</label>
-              </div>
-            </div>
-        </div>
-        <div class="flex-fill d-flex align-items-stretch border">
-          <div class="m-4">
+        <h5 class="card-header">
+          <strong>Bank name:</strong>&nbsp;<em>${schedule_obj["bank_name"]}</em>&nbsp;&nbsp;&nbsp;<strong>Currency:</strong>&nbsp;<em>${schedule_obj["currency"]}</em>
+        </h5>
+
+        <div class="card-body border">
+          <div class="">
             <h5 class="card-title">Message</h5>
-            <p class="card-text">${schedule_obj["message_content"]}</p>
+            <p class="card-text" style="height: 200px; overflow: auto;">${schedule_obj["message_content"]}</p>
           </div>
         </div>
-      </div>
+
+
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="status_switch_${schedule_obj["id"]}" data-action="change->schedule-overview#change_schedule_status" value="${schedule_status_tag[0]}" onchange="this.value = this.checked ? 'on' : 'off'" ${schedule_status_tag[1]}>
+              <label class="form-check-label" for=""><strong>Status:</strong>&nbsp;<em>${schedule_obj["status"]}</em></label>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <span class="badge bg-primary rounded-pill fs-6 fw-bold py-4 px-2">Current: ${schedule_obj["rate_at_setting"]}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708"/>
+              <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+            <span class="badge bg-info rounded-pill fs-6 fw-bold py-4 px-2">Threshold:${schedule_obj["target_rate"]}</span>
+          </li>
+        </ul>
+
+        <div class="card-body">
+          <div class="">
+          <a href="#" class="btn btn-success m-1" data-bs-toggle="modal" data-bs-target="#editorModal_${schedule_obj["id"]}">Adjust alert setting</a>
+          </div>
+        </div>
+
         <div class="card-footer text-muted">
         Last Updated Date:${schedule_obj["updated_at"]}
-        </div>          
+        </div>
+      
       </div>
-      <br>`;
+      </div>`;
   }
 
   getScheduleModalTemplate(schedule_obj){
-    let edit_maximum = Number(schedule_obj["rate_at_setting"])*1.50;
-    let edit_minimum = Number(schedule_obj["rate_at_setting"])/1.50;
 
     return `
     <div class="modal fade" id="editorModal_${schedule_obj["id"]}" tabindex="-1" aria-labelledby="editorModalLabel" aria-hidden="true">

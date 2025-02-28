@@ -39,11 +39,9 @@
     </div>
 
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-
       <div data-controller="schedule-overview" data-schedule-overview-query-url-value="/exchange_rate/<%=session[:option]['operation_sub_tag']%>/schedule_inquiry?user_id_hash=<%=session[:core]['user_id']%>">
-        <div data-schedule-overview-target="results"></div>
+        <div class="row" data-schedule-overview-target="results"></div>
       </div>
-    
     </div>
     
   </div>

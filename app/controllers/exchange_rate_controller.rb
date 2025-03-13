@@ -22,20 +22,36 @@ class ExchangeRateController < ApplicationController
   def schedule_inquiry
     bank_name    = params[:bank_name]
     user_id_hash = params[:user_id_hash]
-    render json: ExchangeRateMonitor.where(creator_id: user_id_hash).as_json
+
+    monitors = ExchangeRateMonitor.where(creator_id: user_id_hash)
+    monitors.each do |monitor|
+      case monitor.currency
+      when 'usd'
+        current_rate = bot_instantly_exchange_rate_hash['usd']['spot_buying']
+        monitor.update(rate_at_setting: current_rate)
+      when 'jpy'
+        current_rate = bot_instantly_exchange_rate_hash['jpy']['cash_selling']
+        monitor.update(rate_at_setting: current_rate)
+      end
+    end
+
+    render json: monitors.as_json
   end
 
   def schedule_update
     schedule_id              = params[:schedule_id]
     schedule_target_rate     = params[:schedule_target_rate]
     schedule_message_content = params[:schedule_message_content]
+    schedule_alert_type      = params[:schedule_alert_type] == 'less' ? 0 : 1 
+
+
     if params[:schedule_status].present?
       schedule_status = params[:schedule_status] == "on" ? "pending" : "paused"
     else
       schedule_status = nil
     end
 
-    update_hash = {target_rate: schedule_target_rate, message_content: schedule_message_content, status: schedule_status} 
+    update_hash = {target_rate: schedule_target_rate, message_content: schedule_message_content, status: schedule_status, alert_type: schedule_alert_type} 
     update_hash = update_hash.select {|key, value| value.present? }
     
     if ExchangeRateMonitor.find(schedule_id).update!(update_hash)
@@ -102,6 +118,30 @@ class ExchangeRateController < ApplicationController
 
   def add_operation_sub_tag
     session[:option]['operation_sub_tag'] = 'bot'
+  end
+
+  def bot_instantly_exchange_rate_hash
+    source_path = AppConfig.web_crawler.bot_source.instantly_rate_path
+    response    = Faraday.get(source_path).body
+    html_data   = Nokogiri::HTML(response)
+
+    head_info       = html_data.at_css('h1.hero__header span#h1_id span.hidden-phone').text.strip
+    note_info       = html_data.at_css('p.text-info').text.strip
+    currencies_data = html_data.css('tbody tr')
+
+    currencies_info_hash = {}
+    currencies_data.each do |currency_data|
+      currency_tag = currency_data.at_css('td.currency.phone-small-font > div > div.visible-phone.print_hide').text.strip
+        if ["American Dollar (USD)", "Japanese Yen (JPY)"].include?(currency_tag)
+          sub_hash = {}
+          sub_hash["cash_buying"] = BigDecimal(currency_data.at_css('td[data-table="Cash Buying"]').text.strip)
+          sub_hash["cash_selling"] = BigDecimal(currency_data.at_css('td[data-table="Cash Selling"]').text.strip)
+          sub_hash["spot_buying"] = BigDecimal(currency_data.at_css('td[data-table="Spot Buying"]').text.strip)
+          sub_hash["spot_selling"] = BigDecimal(currency_data.at_css('td[data-table="Spot Selling"]').text.strip)
+          currencies_info_hash[currency_tag[-4..-2].downcase] = sub_hash
+      end
+    end
+    currencies_info_hash
   end
 
 end

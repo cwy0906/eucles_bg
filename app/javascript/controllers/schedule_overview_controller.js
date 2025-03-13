@@ -44,13 +44,14 @@ export default class extends Controller {
     let schedule_id      = edit_confirm_btn.id.replace("edit_confirm_btn_","")
     let schedule_target_rate     = document.querySelector("#schedule_target_rate_"+schedule_id).value
     let schedule_message_content = document.querySelector("#schedule_message_content_"+schedule_id).value
+    let schedule_alert_type      = document.querySelector("#schedule_alert_type_"+schedule_id).value
 
     fetch("/exchange_rate/schedule_update", {
         method: "post",
         headers:{ "Content-Type":"application/json",
                   "X-CSRF-Token":document.querySelector("meta[name='csrf-token']").content
         },
-        body: JSON.stringify({schedule_id: schedule_id, schedule_target_rate: schedule_target_rate, schedule_message_content: schedule_message_content})
+        body: JSON.stringify({schedule_id: schedule_id, schedule_target_rate: schedule_target_rate, schedule_message_content: schedule_message_content,schedule_alert_type: schedule_alert_type})
         } 
       ).then(response => response.json()).then(data => {
         this.show()
@@ -69,7 +70,7 @@ export default class extends Controller {
       <div class="col-sm-4">
       <div class="card">
         <h5 class="card-header">
-          <strong>Bank name:</strong>&nbsp;<em>${schedule_obj["bank_name"]}</em>&nbsp;&nbsp;&nbsp;<strong>Currency:</strong>&nbsp;<em>${schedule_obj["currency"]}</em>
+          <strong>Bank name:</strong>&nbsp;<em>${schedule_obj["bank_name"]}</em>&nbsp;&nbsp;<strong>Currency:</strong>&nbsp;<em>${schedule_obj["currency"]}</em>&nbsp;&nbsp;<strong>Type:</strong>&nbsp;<em>${schedule_obj["alert_type"]}</em>
         </h5>
 
         <div class="card-body border">
@@ -130,6 +131,11 @@ export default class extends Controller {
                 <textarea class="form-control" rows="5" disabled>${schedule_obj["message_content"]}</textarea>
                 </div>
                 <div class="mb-3 m-2">
+                  <select class="form-select" aria-label="Disabled select example" disabled>
+                    <option selected>${schedule_obj["alert_type"]}</option>
+                  </select>
+                </div>
+                <div class="mb-3 m-2">
                   <input type="number" class="form-control" value=${schedule_obj["target_rate"]} disabled>
                 </div>
               </p>
@@ -139,6 +145,13 @@ export default class extends Controller {
               <p class="card-text">
                 <div class="mb-3 m-2">
                   <textarea class="form-control" id="schedule_message_content_${schedule_obj["id"]}" rows="5">${schedule_obj["message_content"]}</textarea>
+                </div>
+                <div class="mb-3 m-2">
+                  <select id="schedule_alert_type_${schedule_obj["id"]}" class="form-select" aria-label="Default select example">
+                    <option value="${schedule_obj["alert_type"]}" selected>select compare type</option>
+                      <option value="less">less</option>
+                      <option value="greater">greater</option>
+                  </select>
                 </div>
                 <div class="mb-3 m-2">
                   <input type="number" class="form-control" id="schedule_target_rate_${schedule_obj["id"]}" value=${schedule_obj["target_rate"]} step="0.01">

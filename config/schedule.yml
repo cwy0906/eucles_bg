@@ -1,0 +1,13 @@
+
+rate_alert_scanner_task_job:
+  cron: "* * * * *"  
+  class: "RateAlertScannerTaskJob"
+  queue: default
+  active_job: true
+  timezone: "Asia/Taipei"
+daily_rate_update_task_job:
+  cron: "0 12 * * *"  
+  class: "DailyRateUpdateTaskJob"
+  queue: default
+  active_job: true
+  timezone: "Asia/Taipei"
